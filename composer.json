@@ -1,0 +1,19 @@
+{
+  "name": "zyj/alipay",
+  "description": "基于支付宝官方skd修改的composer版本",
+  "type": "library",
+  "require-dev": {},
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "zyj",
+      "email": "617242499@qq.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "zyj\\alipay\\": "src/"
+    }
+  }
+}
