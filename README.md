@@ -23,7 +23,13 @@ $priKey = '商户私钥';
 $pubKey = '支付宝公钥';
 $notify_url = '异步回调地址';
 
-$appPayModel = new \zyj\alipay\AppPay($appId, $priKey, $pubKey, $notify_url);
+$appPayModel = new \zyj\alipay\AppPay([
+    'appId' => $appId,
+    'rsaPrivateKey' => $priKey,
+    'alipayRsaPublicKey' => $pubKey,
+    'notifyUrl' => $notify_url,
+    'isDev' => false //true 沙箱 false 正式
+]);
 //发起app支付
 $result = $appPayModel->request([
     //对一笔交易的具体描述信息 非必填
@@ -37,10 +43,13 @@ $result = $appPayModel->request([
     'total_amount' => 0.01
 ]);
 echo $result;
-//exit;
+exit;
 ```
 ###### 2. 处理回调
 ```php
+$appPayModel = new \zyj\alipay\AppPay([
+    'rsaPrivateKey' => $priKey
+]);
 if ($appPayModel->notify()) {
     //验签成功
     $trade_status = $_POST['trade_status'];
