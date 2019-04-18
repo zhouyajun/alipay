@@ -1,9 +1,6 @@
 # alipay
 基于官方sdk3.3.2版本修改的composer版本
-### 官方文档
-[参数](https://docs.open.alipay.com/204/105301/)
 
-[demo](https://docs.open.alipay.com/54/106370/)
 ### 环境要求
 1. php5.5+
 2. composer
@@ -12,13 +9,19 @@
 `composer require zyj/alipay`
 
 ### 使用方法
-##### app支付
-1. 发起支付
+#### app支付
+
+##### 官方文档
+[参数](https://docs.open.alipay.com/204/105301/)
+
+[demo](https://docs.open.alipay.com/54/106370/)
+
+##### 1. 发起支付
 ```php
-$appId = '';
-$priKey = '';
-$pubKey = '';
-$notify_url = '';
+$appId = '蚂蚁金服开发平台应用id';
+$priKey = '商户私钥';
+$pubKey = '支付宝公钥';
+$notify_url = '异步回调地址';
 
 $appPayModel = new \zyj\alipay\AppPay($appId, $priKey, $pubKey, $notify_url);
 //发起app支付
@@ -36,7 +39,7 @@ $result = $appPayModel->request([
 echo $result;
 //exit;
 ```
-2. 处理回调
+###### 2. 处理回调
 ```php
 if ($appPayModel->notify()) {
     //验签成功
