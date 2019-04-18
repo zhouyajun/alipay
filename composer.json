@@ -10,7 +10,9 @@
       "email": "617242499@qq.com"
     }
   ],
-  "require": {},
+  "require": {
+    "php": "^5.5"
+  },
   "autoload": {
     "psr-4": {
       "zyj\\alipay\\": "src/"
