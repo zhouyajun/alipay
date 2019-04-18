@@ -47,31 +47,35 @@ class AppPay
     /*
      * 支付结果回调地址
      */
-    public $notify_url;
+    public $notifyUrl;
 
     /**
      * AppPay constructor.
-     * @param string $appId
-     * @param string $rsaPrivateKey
-     * @param string $alipayRsaPublicKey
-     * @param bool $is_dev
+     * @param array $config_arr
+     * - isDev bool
+     * - appId string
+     * - rsaPrivateKey
+     * - alipayRsaPublicKey
+     * - notify_url
      */
-    public function __construct($appId, $rsaPrivateKey, $alipayRsaPublicKey, $notify_url, $isDev = true)
+    public function __construct($config_arr = [])
     {
-        $this->isDev = $isDev;
+        if (isset($config_arr['isDev'])) {
+            $this->isDev = (bool)$config_arr['isDev'];
+        }
         $this->nowGetwayUrl = $this->isDev === true ? $this->sandBoxUrl : $this->normalUrl;
 
-        if (!empty($appId)) {
-            $this->appId = $appId;
+        if (isset($config_arr['appId']) && !empty($config_arr['appId'])) {
+            $this->appId = $config_arr['appId'];
         }
-        if (!empty($rsaPrivateKey)) {
-            $this->rsaPrivateKey = $rsaPrivateKey;
+        if (isset($config_arr['rsaPrivateKey']) && !empty($config_arr['rsaPrivateKey'])) {
+            $this->rsaPrivateKey = $config_arr['rsaPrivateKey'];
         }
-        if (!empty($alipayRsaPublicKey)) {
-            $this->alipayRsaPublicKey = $alipayRsaPublicKey;
+        if (isset($config_arr['alipayRsaPublicKey']) && !empty($config_arr['alipayRsaPublicKey'])) {
+            $this->alipayRsaPublicKey = $config_arr['alipayRsaPublicKey'];
         }
-        if (!empty($notify_url)) {
-            $this->notify_url = $notify_url;
+        if (isset($config_arr['notifyUrl']) && !empty($config_arr['notifyUrl'])) {
+            $this->notifyUrl = $config_arr['notifyUrl'];
         }
     }
 
@@ -90,7 +94,7 @@ class AppPay
         //SDK已经封装掉了公共参数，这里只需要传入业务参数
         $body['product_code'] = 'QUICK_MSECURITY_PAY';
         $bizcontent = json_encode($body, JSON_UNESCAPED_UNICODE);
-        $request->setNotifyUrl($this->notify_url);
+        $request->setNotifyUrl($this->notifyUrl);
         $request->setBizContent($bizcontent);
         //这里和普通的接口调用不同，使用的是sdkExecute
         $response = $aop->sdkExecute($request);

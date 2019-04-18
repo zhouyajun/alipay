@@ -14,7 +14,13 @@ $priKey = 'MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCD/dzAMSQQgCrab85Hv
 $pubKey = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtvLr/QnivAtyBAciFafKmvAA6nLkDiAWTJdNBF6smbtvyWK+Oy2y08Oa2IkOoYw2JDEwqcelHLAEvwywljcJeVlKlOdzmMdp3siVT8YAVpX60yyLO7/eL13x/cTgn3klvyDIefEDn6wAKk/10XZAMWI0Ep3fy6/njihUQrzL2YM58DY+gqDF/d8oM1iK++PbIIuafvGoFrJXd01AfMjJFeZt0U3yA4lzlNZHjm3VpKStl4j+TbtNwNXXQT/jwO34Fy7ilazmzhjLiDwzjhRI/zUAW2KVgafZXe0R+B6CJEllhbqIJHpyfsqn9NsEJrBC4R2GHSyBJVqv0OxSNv6TSQIDAQAB';
 $notify_url = 'http://cs.itsurfing.cn';
 
-$appPayModel = new \zyj\alipay\AppPay($appId, $priKey, $pubKey, $notify_url);
+$appPayModel = new \zyj\alipay\AppPay([
+    'appId' => $appId,
+    'rsaPrivateKey' => $priKey,
+    'alipayRsaPublicKey' => $pubKey,
+    'notifyUrl' => $notify_url,
+    'isDev' => false //true 沙箱 false 正式
+]);
 //发起app支付
 $result = $appPayModel->request([
     //对一笔交易的具体描述信息 非必填
@@ -30,6 +36,9 @@ $result = $appPayModel->request([
 echo $result;
 //exit;
 //回调写法
+$appPayModel = new \zyj\alipay\AppPay([
+    'rsaPrivateKey' => $priKey
+]);
 if ($appPayModel->notify()) {
     //验签成功
     $trade_status = $_POST['trade_status'];
