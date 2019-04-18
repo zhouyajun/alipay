@@ -78,7 +78,7 @@ class AppPay
     public function request(array $body)
     {
         $aop = new AopClient();
-        $aop->gatewayUrl = $this->getwayUrl;
+        $aop->gatewayUrl = $this->nowGetwayUrl;
         $aop->appId = $this->appId;
         $aop->rsaPrivateKey = $this->rsaPrivateKey;
         $aop->format = $this->format;
