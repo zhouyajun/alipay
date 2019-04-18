@@ -14,7 +14,7 @@
 ##### 官方文档
 [参数](https://docs.open.alipay.com/204/105301/)
 
-[demo](https://docs.open.alipay.com/54/106370/)
+[DEMO & SDK](https://docs.open.alipay.com/54/106370/)
 
 ##### 1. 发起支付
 ```php
