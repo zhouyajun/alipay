@@ -98,8 +98,10 @@ class AppPay
         $request->setBizContent($bizcontent);
         //这里和普通的接口调用不同，使用的是sdkExecute
         $response = $aop->sdkExecute($request);
+        return $response;
         //htmlspecialchars是为了输出到页面时防止被浏览器将关键参数html转义，实际打印到日志以及http传输不会有这个问题
-        return htmlspecialchars($response);//就是orderString 可以直接给客户端请求，无需再做处理。
+        //就是orderString 可以直接给客户端请求，无需再做处理。
+//        return htmlspecialchars($response);
     }
 
     /**
